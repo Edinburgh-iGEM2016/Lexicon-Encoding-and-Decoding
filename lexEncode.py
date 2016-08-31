@@ -1,5 +1,6 @@
 # program to encode a lexicon in babblebrick format
-# freddie starkey for edinburgh igem 2016
+# babbled - edinburgh ug igem 2016
+# freddie starkey 
 
 from operator import add
 
@@ -76,6 +77,7 @@ def addOrc(paddedDNAcode):
     return orcSeq[0] + "GG" + orcSeq[1] + "TT" + orcSeq[2] + "GG" + orcSeq[3] + "TT" + orcSeq[4]
 
 def dnaToNum(dnaCode):
+    # converts dna sequence to equivalent number for use in orc
     num = ""
     for eachBase in dnaCode:
         if eachBase == 'A':
@@ -93,19 +95,13 @@ def orcPad(unpaddedOrc):
     return ('A' * (2 - len(unpaddedOrc))) + unpaddedOrc
 
 def hangAB(word):
+    # adds the hangs to create an AB form BabbleBrick
     return "GGAG" + word + "CGCT"
 
 def hangBA(word):
+    # adds the hangs to create an BA form BabbleBrick
     return "CGCT" + word + "GGAG"
 
 def restrictionGap(word):
-    #return word[0] + 'CC' + word[1:]
+    # adds a gap sequence in the word coding region to prevent the formation of illegal restriction sites
     return word[0] + 'TT' + word[1:]
-
-encode("/home/freddie/PycharmProjects/iGEM/ogdan",
-       "/home/freddie/PycharmProjects/iGEM/codeRecord",
-       "/home/freddie/PycharmProjects/iGEM/gBlocks")
-
-#encode("/home/freddie/PycharmProjects/iGEM/maryLex",
-       #"/home/freddie/PycharmProjects/iGEM/mary letter encoding",
-       #"/home/freddie/PycharmProjects/iGEM/gBlocks")
