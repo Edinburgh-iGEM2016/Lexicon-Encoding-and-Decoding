@@ -1,30 +1,17 @@
 # program to encode a passage of text in dna
-# freddie starkey for edinburgh igem 2016
+# babbled - edinburgh ug igem 2016
+# freddie starkey 
 
 import lexEncode
 import re
 
-#lexicon = lexEncode.encode("/home/freddie/PycharmProjects/iGEM/ogdan",
-                           #"/home/freddie/PycharmProjects/iGEM/codeRecord",
-                           #"/home/freddie/PycharmProjects/iGEM/gBlocks")
-
-lexicon = lexEncode.encode("/home/freddie/PycharmProjects/iGEM/maryLex",
-                           "/home/freddie/PycharmProjects/iGEM/mary letter encoding",
-                           "/home/freddie/PycharmProjects/iGEM/gBlocks")
-
-
-#print lexicon
-
 def storeInSeq(filepath, lexicon):
     print lexicon
     sentences = readIn(filepath)  # list of sentences
-    #sentences = readIn("/home/freddie/PycharmProjects/iGEM/mary letter")
     print sentences
-    #dnaSentences = map(wordSeqs, sentences, lexicon)
     dnaSentences = [wordSeqs(sentence, lexicon) for sentence in sentences]
     print dnaSentences
     filterDnaSentences = filter(None, dnaSentences)  # list of lists of sentences with possible dna conversions
-    #checked = map(checksum, filterDnaSentences, lexicon)
     checked = [checksum(filterDnaSentence, lexicon) for filterDnaSentence in filterDnaSentences]
     addressedDnaSentences = addAddresses(checked, lexicon)
     print "check"
@@ -104,14 +91,4 @@ def completeStrand(dnaSentence):
     toJoin = [word[4:] for word in dnaSentence[1:]]
     toJoin.insert(0, dnaSentence[0])
     return ''.join(toJoin)
-
-#encoding = storeInSeq("/home/freddie/PycharmProjects/iGEM/textToRead")
-
-encoding = storeInSeq("/home/freddie/PycharmProjects/iGEM/mary extra sentences", lexicon)
-
-print encoding
-
-
-
-
-
+    
